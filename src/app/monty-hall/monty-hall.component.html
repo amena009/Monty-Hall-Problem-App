@@ -1,0 +1,69 @@
+
+<!-- bootstrap modal to display message -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><b>Confirmation</b></h2>
+            </div>
+            <div class="modal-body">
+                {{modalMsg}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="switchConfirmation(true)">
+                    Yes. Switch to Door {{calc}}.
+                </button>
+                <button type="button" class="btn btn-primary" (click)="closePopup(false)">
+                    No. Play with my original selection .
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    
+    <div class="homeButton" >
+        <button routerLink="/" type="button" class="btn btn" >
+         <b>Home</b>
+        </button>
+    </div>
+    
+        
+        <button *ngIf="result == '' " type="button" class="btn btn" (click)="reset()">
+            <b>{{welcomeMsg}}</b>
+        </button>
+      
+        <div class="resetButton">
+            <button  type="button" class="btn btn" >
+                <b>Reset</b>
+               </button>
+        </div>
+
+    
+
+
+    <div class="card-container">
+        <div *ngFor="let door of doors;" data-toggle="modal" (click)="result == '' ? chooseDoor(door) : false">
+            <a class="card">
+                <div *ngIf="result == '' "
+                    [ngClass]="finalRevealed > 0 && door == revealedDoor ? 'cancleDoor' : 'door-number'"
+                    class="door-number"><b>Door {{ door }}</b> </div>
+
+                <div *ngIf="result != '' " [ngClass]="door == winningDoor ? 'winDoor' : 'cancleDoor'"
+                    class="door-number"><b>Door {{ door }}</b> </div>
+            </a>
+        </div>
+    </div>
+
+    <button *ngIf="result != '' " type="button" class="btn btn-info">
+        {{result}}
+    </button>
+
+    <div *ngIf="showAnimation" (animationend)="onAnimationEnd()" class="winner-screen">
+        <div class="balloon-container">
+            <div class="balloon" [ngClass]="finalChoice === winningDoor ? 'balloon1' : 'lose' "></div>
+        </div>
+    </div>
+</div>
