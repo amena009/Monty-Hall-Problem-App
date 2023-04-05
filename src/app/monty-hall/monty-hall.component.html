@@ -31,12 +31,12 @@
     </div>
     
         
-        <button *ngIf="result == '' " type="button" class="btn btn" (click)="reset()">
+        <button *ngIf="result == '' " type="button" class="btn btn" >
             <b>{{welcomeMsg}}</b>
         </button>
       
         <div class="resetButton">
-            <button  type="button" class="btn btn" >
+            <button (click)="reset()" type="button" class="btn btn" >
                 <b>Reset</b>
                </button>
         </div>
